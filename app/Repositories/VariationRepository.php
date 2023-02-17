@@ -19,9 +19,14 @@ class VariationRepository implements VariationRepositoryInterface
         $this->model = $model;
     }
 
-    public function paginate() 
+    public function paginate($request) 
     {
-        return $this->model::paginate(10);
+        $data = $this->model->query();
+
+        if (isset($request[Variation::ATTR_PRODUCT_ID]) && $request[Variation::ATTR_PRODUCT_ID])
+            $data->where(Variation::ATTR_PRODUCT_ID, $request[Variation::ATTR_PRODUCT_ID]);
+            
+        return $data->paginate(10);
     }    
 
     public function save(array $data)

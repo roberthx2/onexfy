@@ -10,11 +10,14 @@ class Variation extends Model implements VariationInterface
 {
     use HasFactory;
 
+    const TABLE_NAME = 'variations';
     const ATTR_PK = 'id';
     const ATTR_REFERENCE = 'reference';
     const ATTR_DESCRIPTION = 'description';
     const ATTR_PRICE = 'price';
     const ATTR_PRODUCT_ID = 'product_id';
+
+    protected $table = self::TABLE_NAME;
  
     protected $fillable = [
         self::ATTR_REFERENCE,

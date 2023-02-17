@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::namespace('App\Http\Controllers')
+->group(function () {
+    Route::get('products','ProductController@index')->name('product.index');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

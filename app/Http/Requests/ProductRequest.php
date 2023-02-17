@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
     {
         return [
             Product::ATTR_NAME => 'required',
-            Product::ATTR_REFERENCE => 'required',
+            Product::ATTR_REFERENCE => 'required|unique:'.Product::TABLE_NAME.','.Product::ATTR_REFERENCE.','.$this->product,
             Product::ATTR_DESCRIPTION => 'required',
             Product::ATTR_PRICE => 'required|numeric',
         ];
@@ -40,7 +40,7 @@ class ProductRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success'   => false,
             'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
+            'errors'      => $validator->errors()
+        ], 422));
     }
 }

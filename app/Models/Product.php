@@ -10,12 +10,15 @@ class Product extends Model implements ProductInterface
 {
     use HasFactory;
 
+    const TABLE_NAME = 'products';
     const ATTR_PK = 'id';
     const ATTR_NAME = 'name';
     const ATTR_REFERENCE = 'reference';
     const ATTR_DESCRIPTION = 'description';
     const ATTR_PRICE = 'price';
     const RELATION_VARIATIONS = 'variations';
+
+    protected $table = self::TABLE_NAME;
  
     protected $fillable = [
         self::ATTR_NAME,

@@ -27,7 +27,7 @@ class VariationRequest extends FormRequest
     public function rules()
     {
         return [
-            Variation::ATTR_REFERENCE => 'required',
+            Variation::ATTR_REFERENCE => 'required|unique:'.Variation::TABLE_NAME.','.Variation::ATTR_PK.','.$this->variation,
             Variation::ATTR_DESCRIPTION => 'required',
             Variation::ATTR_PRICE => 'required|numeric',
             Variation::ATTR_PRODUCT_ID => 'required|exists:products,id'
@@ -40,7 +40,7 @@ class VariationRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'success'   => false,
             'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
+            'errors'      => $validator->errors()
+        ], 422));
     }
 }

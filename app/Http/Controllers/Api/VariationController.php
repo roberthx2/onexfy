@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VariationRequest;
 use App\Http\Resources\VariationResource;
@@ -22,9 +23,9 @@ class VariationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new VariationCollection($this->variationRepository->paginate());
+        return new VariationCollection($this->variationRepository->paginate($request->all()));
     }
 
     /**
